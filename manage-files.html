@@ -1,1 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Files - Sereno CDNJS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            text-align: center;
+        }
+        main {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .file-card {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .import-code {
+            background-color: #f4f4f4;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .copy-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 0.5rem 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Manage Your Files</h1>
+    </header>
+    <main>
+        <div id="file-list">
+            <!-- File cards will be dynamically added here -->
+        </div>
+    </main>
 
+    <script>
+        // Sample data - replace with actual data from your system
+        const files = [
+            { name: "File 1", description: "Description for File 1", importCode: "<script src='https://cdn.example.com/file1.js'></script>" },
+            { name: "File 2", description: "Description for File 2", importCode: "<script src='https://cdn.example.com/file2.js'></script>" },
+        ];
+
+        const fileList = document.getElementById('file-list');
+
+        files.forEach(file => {
+            const card = document.createElement('div');
+            card.className = 'file-card';
+            card.innerHTML = `
+                <h3>${file.name}</h3>
+                <p>${file.description}</p>
+                <div class="import-code">
+                    <code>${file.importCode}</code>
+                </div>
+                <button class="copy-btn" onclick="copyToClipboard('${file.importCode}')">Copy Import Code</button>
+            `;
+            fileList.appendChild(card);
+        });
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Import code copied to clipboard!');
+            }, (err) => {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
